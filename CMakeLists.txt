@@ -4,4 +4,8 @@ project(MyProject)
 
 set(CMAKE_CXX_STANDARD 17)
 
+find_package(OpenSSL REQUIRED)
+
 add_executable(MyProject main.cpp)
+
+target_link_libraries(MyProject OpenSSL::SSL OpenSSL::Crypto)
