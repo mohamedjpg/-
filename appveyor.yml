@@ -1,1 +1,27 @@
 
+version: 1.0.{build}
+
+image:
+  - Visual Studio 2022
+
+environment:
+  matrix:
+    - platform: x64
+
+configuration:
+  - Release
+
+before_build:
+  - cmake -G "Visual Studio 17 2022" -A %platform% .
+
+build:
+  project: ALL_BUILD.vcxproj
+  parallel: true
+  verbosity: minimal
+
+after_build:
+  - echo Build completed
+
+artifacts:
+  - path: '**\Release\*.exe'
+    name: binaries
